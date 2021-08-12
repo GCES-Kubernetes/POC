@@ -12,6 +12,6 @@ export class BackendService {
   getDataFlaskMongo(): Observable<any> {
     let header: HttpHeaders = new HttpHeaders();
     header = header.append("Content-Type", "application/json");
-    return this.http.get('/flask/mongo', { headers: header })
+    return this.http.get('flask/mongo', { headers: header })
   }
 }

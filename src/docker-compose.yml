@@ -6,18 +6,19 @@ services:
       context: ./backend/
       dockerfile: Dockerfile
     volumes:
-      - ./flask/:/code
+      - ./backend/:/code
     ports:
       - 9000:9000
 
   front:
     build:
-      context: ./frontend/poc/
+      context: ./front/
       dockerfile: Dockerfile
     ports:
       - 5000:80
     links:
-      - flask  
+      - flask
+        
   mongo:
     build:
       context: ./db/

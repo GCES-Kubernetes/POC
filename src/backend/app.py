@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 def get_from_mongo():
 
-    mongo_host = os.environ.get("MONGO_HOST", "localhost")
+    mongo_host = os.environ.get("MONGO_HOST", "mongo")
     mongo_port = int(os.environ.get("MONGO_PORT", 27017))
     mongo_user = os.environ.get("MONGO_USER", "root")
     mongo_pass = os.environ.get("MONGO_PASSWORD", "root")
