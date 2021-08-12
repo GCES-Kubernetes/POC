@@ -1,0 +1,63 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: flask
+  labels:
+    app: flask
+    service: flask
+spec:
+  ports:
+  - port: 9000
+    name: http
+  selector:
+    app: flask
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask
+  labels:
+    app: flask
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flask
+  template:
+    metadata:
+      labels:
+        app: flask
+    spec:
+      containers:
+      - name: flask
+        image: severinobot/gces_poc_backend:latest
+        ports:
+        - containerPort: 9000
+        env:
+          - name: VERSION
+            value: "0.0.1"
+          - name: APP_HOST
+            value: "0.0.0.0"
+          - name: APP_PORT
+            value: "9000"
+          - name: GUNICORN_WORKERS
+            value: "1"
+          - name: GUNICORN_THREADS
+            value: "1"
+          - name: GUNICORN_TIMEOUT
+            value: "300"
+          - name: MONGO_HOST
+            value: "mongo"
+          - name: MONGO_PORT
+            value: "27017"
+          - name: MONGO_USER
+            value: "root"
+          - name: MONGO_PASSWORD
+            value: "root"
+          - name: MONGO_DB
+            value: "test"
+          - name: MONGO_COLLECTION
+            value: "test"
+
+---

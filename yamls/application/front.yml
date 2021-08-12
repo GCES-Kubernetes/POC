@@ -1,0 +1,40 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: angular
+  labels:
+    app: angular
+    service: angular
+spec:
+  ports:
+  - name: http
+    port: 80
+    targetPort: 80
+
+  selector:
+    app: angular
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: angular
+  labels:
+    app: angular
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: angular
+  template:
+    metadata:
+      labels:
+        app: angular
+    spec:
+      containers:
+      - name: angular
+        image: severinobot/gces_poc_front:latest
+        ports:
+        - containerPort: 80
+---
