@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  flask:
+    build:
+      context: ./backend/
+      dockerfile: Dockerfile
+    volumes:
+      - ./flask/:/code
+    ports:
+      - 9000:9000
+
+  front:
+    build:
+      context: ./frontend/poc/
+      dockerfile: Dockerfile
+    ports:
+      - 5000:80
+    links:
+      - flask  
+  mongo:
+    build:
+      context: ./db/
+      dockerfile: Dockerfile
+    ports:
+      - 27017:27017
